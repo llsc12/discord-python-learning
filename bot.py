@@ -1,5 +1,4 @@
 # bot.py
-
 import os
 import asyncio
 import discord
@@ -9,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-client = commands.Bot(command_prefix='!')
+client = commands.Bot(command_prefix='!', intents=discord.Intents.all()) # Head over to discord.com/developers/applications and enable intents on the bot
 
 
 @client.event
@@ -18,13 +17,13 @@ async def on_ready():
 
 
 @client.command()
-async def ping(message):
-    await message.send(f"{round(client.latency * 1000)}ms")
+async def ping(ctx):
+    await ctx.send(f"{round(client.latency * 1000)}ms")
 
 
 @client.command()
-async def shrug(message, *, text):
-    await message.send(str(text)+str("¯\_(ツ)_/¯"))
+async def shrug(ctx, *, text):
+    await ctx.send(str(text)+str("¯\_(ツ)_/¯"))
 
 
 @client.command()
@@ -42,9 +41,5 @@ async def embed(message, title:str=None, description:str=None, location:int=None
         channel = client.get_channel(location)
         await channel.send(embed=embed)
         
-@client.command()
-async def colorme(message):
-    if 
-
 
 client.run(TOKEN)
